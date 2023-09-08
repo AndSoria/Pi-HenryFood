@@ -1,0 +1,165 @@
+/* .detailContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: row;
+    width: 1000px;
+    height: 500px;
+    margin-top: 80px;
+    background: #252a30;
+    box-shadow: 0 8px 32px 0 #25272a;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px;
+}
+
+
+.backLeft{
+    background-color: #AC7C44;
+    border: solid 2px red;
+    width: 280px;
+    height: 470px;
+
+}
+
+.backRight{
+    background-color: rebeccapurple;
+    border: solid 2px blue;
+    width: 680px;
+    height: 470px;
+    background: none;
+    } */
+
+    
+
+/* .imageContainer {
+    width: 280px;
+    height: 250px;
+    border: solid 2px yellow;
+    overflow: hidden; 
+    justify-content: flex-start;
+    align-items: start;
+    display: flex;
+    background: none;
+}
+
+.img {
+    display: block; 
+    width: 100%; 
+    height: auto; 
+    border-radius: 30px;
+} */
+
+
+
+
+.parent {
+    display: grid; /* Establece que el contenedor .parent utiliza el modelo de cuadrícula. */
+    grid-template-columns: 400px 800px; /* Define las columnas de la cuadrícula y sus anchos. */
+    grid-template-rows: 80px repeat(4, 80px) 100px; /* Define las filas de la cuadrícula y sus alturas. */
+    grid-column-gap: 14px; /* Establece el espacio horizontal entre columnas. */
+    grid-row-gap: 5px; /* Establece el espacio vertical entre filas. */
+    margin-top: 80px; /* Agregado: espacio desde la parte superior */
+    background: #252a30; /* Agregado: color de fondo */
+    box-shadow: 0 8px 32px 0 #25272a; /* Agregado: sombra */
+    backdrop-filter: blur(20px); /* Agregado: filtro de desenfoque */
+    -webkit-backdrop-filter: blur(20px); /* Agregado: filtro de desenfoque para navegadores basados en WebKit */
+    border-radius: 30px; /* Agregado: borde redondeado */
+
+}
+    
+    .div1 { /*esta columna contiene los datos */
+         grid-area: 1 / 1 / 7 / 2;
+         /* border:solid 2px red; */
+         /* background-color: #AC7C44; */
+         background-image: url(../../utils/image/Dark/Products\ -\ Clay.jpg);
+         border-radius: 30px 0 0 30px;
+         height: 900px;
+         }
+
+    .div2 { /* esta columna contiene resumen e instrucciones */ 
+         grid-area: 1 / 2 / 7 / 3;
+         /* border:solid 2px yellow; */
+         /* display: flex; */
+         /* flex-direction: row-reverse; */
+         /* align-items: center; */
+        }
+
+    .div3 { /* contiene el name*/
+         grid-area: 1 / 1 / 2 / 2;
+
+        width: 370px; /* Ancho fijo */
+        height: 245px; /* Altura fija */
+        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        justify-content: end;
+        position: absolute;
+        border-radius: 30px 0 0 0;
+        margin-top: 15px;
+        margin-left: 15px;
+         border:solid 2px yellow;
+
+        }
+
+        .div3 img {
+            max-width: 100%; /* La imagen se ajustará al ancho del contenedor */
+            max-height: 100%; /* La imagen se ajustará a la altura del contenedor */
+            width: auto; /* Para mantener la relación de aspecto de la imagen */
+            height: auto; /* Para mantener la relación de aspecto de la imagen */
+          }
+    .div4 { 
+        grid-area: 2 / 1 / 7 / 2; 
+        border:solid 2px brown;
+    }
+    .div5 { /* contiene imagen*/
+        grid-area: 1 / 2 / 2 / 3;
+        border: solid 2px green;
+        color: aliceblue;
+        font-weight: bold;
+        }
+
+
+        .div6 {
+            grid-area: 2 / 2 / 4 / 3;
+            height: 160px;
+            border: solid 2px yellow;
+            color: aliceblue;
+            display: flex;
+            flex-direction: column;
+          }
+          
+          .div6 h3 {
+            font-size: 20px;
+            align-self: flex-start;
+            margin-left: 5px;
+          }
+          
+          .div6 div {
+            margin: 2px 20px;
+            font-size: 12px;
+          }
+          
+          
+        
+    .div7 { grid-area: 4 / 2 / 7 / 3;
+         border:solid 2px grey;
+         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+         height: fit-content; 
+        }
+    .div8 {
+         grid-area: 2 / 1 / 3 / 2;
+         border:solid 2px  purple;
+        }
+    .div9 { grid-area: 3 / 1 / 4 / 2; border:solid 2px black;}
+    .div10 { grid-area: 4 / 1 / 5 / 2;
+         border:solid 2px pink;
+        
+        
+        }
+    .div11 { grid-area: 5 / 1 / 7 / 2; border:solid 2px green;}
+    .div12 { grid-area: 5 / 1 / 6 / 2; border:solid 2px red;}
+    .div13 { grid-area: 6 / 1 / 7 / 2; border:solid 2px crimson;}

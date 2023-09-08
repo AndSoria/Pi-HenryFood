@@ -1,0 +1,162 @@
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: brown; */
+  /* border: solid 3px red; */
+  height: 310px; /* Altura total de la tarjeta */
+  width: 400px; /* Ancho total de la tarjeta */
+  /* border-radius: 20px; */
+  margin: 20px; /* Espacio alrededor de la tarjeta */
+  background-image: url('../../utils/image/Dark/Products\ -\ Clay.jpg');
+  border-radius: 40px;
+/* background: #363636; */
+  box-shadow:  6px 6px 9px #262626,
+             -6px -6px 9px #464646;
+}
+
+.Name {
+  /* border: solid 3px green; */
+  height: 60px;
+  width: 380px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.ImgAndTypes {
+  /* border: solid 3px blue; */
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  height: 200px;
+}
+
+.Image {
+  /* border: solid 3px gray; */
+  /* justify-content: flex-start; */
+
+  width: 150px; /* Ancho del círculo exterior */
+  height: 150px; /* Altura del círculo exterior */
+  border-radius: 50%; /* Hace que el círculo exterior sea circular */
+  /* background-color: #f0f0f0; Color de fondo del círculo exterior */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center; */
+  margin-left: 20px;
+  /* height: 100px; */
+  /* width: 100px; */
+  /* border-radius: 50%; */
+  /* border-radius: 95px; */
+  border-radius: 95px;
+  background: #AC7C44;
+  box-shadow: inset -10px 10px 20px #45321b,
+            inset 10px -10px 20px #ffc66d;
+
+              
+}
+.Image img {
+  /* border: solid 1px black; */
+  /* height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column; */
+
+
+  width: 135px; /* Ancho del círculo interior */
+  height: 135px; /* Altura del círculo interior */
+  border-radius: 50%; /* Hace que el círculo interior sea circular */
+  background-color: #3498db; /* Color de fondo del círculo interior */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+.TypeOfDiets {
+  /* border: solid 3px wheat; */
+  width: 200px;
+  height: fit-content;
+  margin-left: 10px;
+  border-radius: 13px;
+  padding: 2px;
+background: #AC7C44;
+box-shadow: inset -10px 10px 20px #45321b,
+            inset 10px -10px 20px #ffc66d;
+}
+
+.title {
+  grid-area: title;
+  padding: 10px; /* Espacio interno para el título */
+}
+
+.listItems {
+
+  
+  padding: 10px; /* Espacio interno para la lista de elementos */
+
+  
+  
+}
+
+.reference {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-around;
+ width: 400px;
+ height: 50px;
+ /* border: solid 3px yellow; */
+}
+
+.createdBy {
+  grid-area: createdBy;
+}
+
+.info {
+  grid-area: info;
+}
+
+.linkButton {
+  --hover-shadows: 16px 16px 33px #121212,
+                    -16px -16px 33px #303030;
+  --accent: white;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  border: none;
+  border-radius: 1.1em;
+  background-color: #212121;
+  color: white;
+  padding: 1em 2em;
+  /* transition: box-shadow ease-in-out 0.3s,
+              background-color ease-in-out 0.1s,
+              letter-spacing ease-in-out 0.1s,
+              transform ease-in-out 0.1s; */
+  /* box-shadow: 13px 13px 10px #1c1c1c,
+              -13px -13px 10px #262626; */
+              /* border-radius: 28px; */
+              /* background: linear-gradient(145deg, #3a3a3a, #313131); */
+              box-shadow:  5px 5px 4px #222222,
+                           -5px -5px 4px #4a4a4a;
+
+
+ }
+ 
+ .linkButton:hover {
+  box-shadow: var(--hover-shadows);
+ }
+ 
+ .linkButton:active {
+  box-shadow: var(--hover-shadows),
+               var(--accent) 0px 0px 30px 5px;
+  background-color: var(--accent);
+  transform: scale(0.95);
+ }
