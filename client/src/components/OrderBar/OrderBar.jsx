@@ -3,17 +3,34 @@ import style from './OrderBar.module.css'
 import { sortName, sortScore } from '../../redux/actions'
 
 
-const OrderBar=()=>{
+const OrderBar=({orders, setOrders})=>{
 
     const dispatch=useDispatch()
 
-    const handleOrder= (e)=>{
-        if(e.target.value==='HIGH_TO_LOW' || e.target.value==='LOW_TO_HIGH'){
-            dispatch(sortScore(e.target.value))
-        }
-        if(e.target.value ==='A' || e.target.value==='D'){
-            dispatch(sortName(e.target.value))
-        }
+    const handleOrder=async (e)=>{
+       await setOrders((orders)=>[...orders, e.target.value])
+
+       orders.map(order=>{
+
+           if(order==='HIGH_TO_LOW' && !orders.includes('LOW_TO_HIGH')){
+               dispatch(sortScore(order))
+           }
+           else{
+                if(order==='LOW_TO_HIGH' && !orders.includes('HIGH_TO_LOW')){
+                    dispatch(sortScore(order))
+                }
+           }
+
+           if(order ==='A' && !orders.includes('D')){
+               dispatch(sortName(order))
+           }
+           else{
+                if(order ==='D' && !orders.includes('A')){
+                    dispatch(sortName(order))
+                }
+           }
+
+       })
     }
 
 

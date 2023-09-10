@@ -5,12 +5,17 @@ import FilterBar from "../FilterBar/FilterBar";
 import OrderBar from '../OrderBar/OrderBar'
 import { useDispatch } from "react-redux";
 import { resetFilters } from "../../redux/actions";
+import { useState } from "react";
 
 const NavBar= ()=>{
     const {pathname}=useLocation();
     const dispatch=useDispatch();
+    const [options, setOptions]=useState([]);
+    const [orders,setOrders]=useState([]);
 
     const handleResetFilters=()=>{
+        setOptions([])
+        setOrders([])
         dispatch(resetFilters())
     }
 
@@ -34,8 +39,8 @@ const NavBar= ()=>{
 
             </div>
             <div className={style.auxBar}>
-                    <OrderBar/>
-                    <FilterBar/>
+                    <OrderBar setOrder={setOrder} order={orders} />
+                    <FilterBar setOptions={setOptions}  options={options} />
                     <button className={style.resetBtn} onClick={handleResetFilters}>Clean filters</button>
             </div>
         </div>

@@ -1,27 +1,25 @@
 import { useDispatch } from 'react-redux'
 import style from './OrderBar.module.css'
 import { filterDiets, filterSource} from '../../redux/actions'
-import { useState } from 'react'
 
 
-const FilterBar=()=>{
+
+const FilterBar=({options, setOptions})=>{
     // const arrayFilter=["dairy free", "fodmap friendly", "gluten free", "ketogenic", "lacto ovo vegetarian","paleolithic", "pescatarian", "primal", "vegan", "vegetarian", "whole 30"]
 
     const dispatch=useDispatch()
-    const [options, setOptions]=useState([])
+    
 
     const handleSource= (e)=>{
 
             dispatch(filterSource(e.target.value))
     }
 
-    const handleDiets =(e)=>{
+    const handleDiets = async (e)=>{
 
-        const updatedOptions=[...options, e.target.value]
+        await setOptions((options)=>[...options, e.target.value])
 
-        setOptions(updatedOptions)
-
-        dispatch(filterDiets(updatedOptions))
+        dispatch(filterDiets(options))
 
     }
 
