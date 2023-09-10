@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import style from './CardsContainer.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getRecipes } from '../../redux/actions';
+import Pagination from '../Pagination/Pagination';
 
 // const arrayPrueba=[
 //     {
@@ -311,7 +312,32 @@ import { getRecipes } from '../../redux/actions';
 const CardsContainer = () =>{
 
     const recipes= useSelector(state=>state.recipes) //toma el array que esta en la propiedad recipes del estado global
+    const recipesFilter=useSelector(state=>state.recipesFilter)
+    const recipeName=useSelector(state=>state.recipeName)
+    
     const dispatch= useDispatch();
+
+    //paginacion
+    const [page, setPage]=useState(1); //numero de pagina
+    const [perPage, setPerPage]=useState(9) //cantidad de recetas por pagina
+    const maxPages= Math.ceil(recipes.length / perPage); //cantidad de paginas que vamos a tener
+    const from= (page-1) * perPage; //variable para indicar desde que elemento se va a realizar el slice del array
+    const until=from + perPage; //variable para indicar hasta que elemento se va a realizar el slice del array
+
+    
+    
+    //! estilos de pagination
+    //! un boton para limpiar los filtros
+    //! terminar con el front de detail
+    //? terminar con la funcionalidad y el front de crear recipe
+    //? agregarle la funcion de search bar para buscar por nombre
+    //? dar estilos a la nav bar
+    //* en el backend limpiar funciones
+    //* agregar validaaciones tanto en el front como en el back
+    //* diseñar los manejos de errores
+    //! terminar con los estilos de la landing page
+    //! modificar el force de la base de datos
+    //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
 
     useEffect(()=>{
             dispatch(getRecipes())
@@ -322,16 +348,18 @@ const CardsContainer = () =>{
 
     return (
         <div className={style.cardsContainer}>
-    
-            {recipes.map((recipe)=>{
-                return <Card 
-                    id={recipe.id}
-                    name={recipe.name}
-                    image={recipe.image}
-                    diets={recipe.diets || []} //ver si es necesario tener ese array de diets
-                    created={recipe.created}
-                    ></Card>
-            })}
+            <Pagination page={page} setPage={setPage} maxPages={maxPages}/>
+            <div>
+                {recipes.slice(from, until).map((recipe)=>{
+                    return <Card 
+                        id={recipe.id}
+                        name={recipe.name}
+                        image={recipe.image}
+                        diets={recipe.diets || []} //ver si es necesario tener ese array de diets
+                        created={recipe.created}
+                        ></Card>
+                })}
+            </div>
         </div>
     )
 }
