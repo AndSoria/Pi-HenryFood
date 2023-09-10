@@ -1,11 +1,12 @@
-import { all } from 'axios';
+
 import {GET_RECIPES, GET_RECIPE_ID, GET_BY_NAME, FILTER_BY_DIETS, FILTER_BY_SOURCE, SORT_BY_SCORE, SORT_BY_NAME,RESET_FILTERS} from './actions'
 
 const initialState={
     recipes: [],
     recipeId: [],
     recipeFilter:{recipes: [], filtered:false},
-    recipeName:[],
+    recipesName:[],
+    render:'',
     
 };
 
@@ -14,13 +15,13 @@ const initialState={
 const rootReducer =(state=initialState, action)=>{
     switch(action.type){
         case GET_RECIPES:
-            return {...state, recipes: action.payload}
+            return {...state, render:'recipes', recipes: action.payload}
         
         case GET_RECIPE_ID:
-            return {...state,recipeId: action.payload}
+            return {...state, recipeId: action.payload}
 
         case GET_BY_NAME:
-            return {...state, recipeName: action.payload}
+            return {...state,render:'recipesName', recipeName: action.payload}
         
         case FILTER_BY_DIETS:
             if(state.recipeFilter.filtered===true){
@@ -28,10 +29,11 @@ const rootReducer =(state=initialState, action)=>{
                 const recipesFiltered= state.recipeFilter.recipes.filter(recipe=>recipe.diets.includes(action.payload))
                 return {
                     ...state, 
+                    render:'recipeFilter',
                     recipeFilter:{
                         ...state.recipeFilter,
                         recipeFilter: recipesFiltered
-                    }
+                    },
                 }
             }
             else{
@@ -41,6 +43,7 @@ const rootReducer =(state=initialState, action)=>{
                         const recipesFiltered= state.recipes.filter(recipe=>recipe.diets.includes(action.payload))
                         return {
                             ...state,
+                                render:'recipeFilter',
                                 recipeFilter:{
                                     recipes:recipesFiltered,
                                     filtered:true
@@ -55,6 +58,7 @@ const rootReducer =(state=initialState, action)=>{
                 if(state.recipeFilter.filtered===true){ //tengo un estado filtrado
                     return {
                         ...state, 
+                        render:'recipeFilter',
                         recipeFilter:{
                             ...state.recipeFilter,
                             recipesOfFilter: state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.created===false)
@@ -65,6 +69,7 @@ const rootReducer =(state=initialState, action)=>{
                     if(state.recipeFilter.filtered===false){ //no tengo un estado filtrado
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:
                             {
                                 recipesOfFilter:state.recipes.filter(recipe=>recipe.created===false),
@@ -78,6 +83,7 @@ const rootReducer =(state=initialState, action)=>{
                 if(state.recipeFilter.filtered==='DB'){ //tengo un estado filtrado
                     return {
                         ...state, 
+                        render:'recipeFilter',
                         recipeFilter:{
                             ...state.recipeFilter,
                             recipesOfFilter: state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.created===true)
@@ -88,6 +94,7 @@ const rootReducer =(state=initialState, action)=>{
                     if(state.recipeFilter.filtered===false){ //no tengo un estado filtrado
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:
                             {
                                 recipesOfFilter:state.recipes.filter(recipe=>recipe.created===false),
@@ -106,6 +113,7 @@ const rootReducer =(state=initialState, action)=>{
                         const ordenAscendente= state.recipeFilter.recipesOfFilter.sort((a,b)=>a.name.localCompare(b.name))
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 ...state.recipeFilter,
                                 recipesOfFilter:ordenAscendente,
@@ -116,6 +124,7 @@ const rootReducer =(state=initialState, action)=>{
                         const ordenAscendente= state.recipes.sort((a,b)=>a.name.localCompare(b.name))
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 recipesOfFilter:ordenAscendente,
                                 filtered: true
@@ -130,6 +139,7 @@ const rootReducer =(state=initialState, action)=>{
                         const ordenDescendente= state.recipeFilter.recipesOfFilter.sort((a,b)=>b.name.localCompare(a.name))
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 ...state.recipeFilter,
                                 recipesOfFilter:ordenDescendente,
@@ -140,6 +150,7 @@ const rootReducer =(state=initialState, action)=>{
                         const ordenDescendente= state.recipes.sort((a,b)=>b.name.localCompare(a.name))
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 recipesOfFilter:ordenDescendente,
                                 filtered: true
@@ -155,6 +166,7 @@ const rootReducer =(state=initialState, action)=>{
                         const highToLow= state.recipeFilter.recipesOfFilter.sort((a,b)=>a.healthScore - b.healthScore)
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 ...state.recipeFilter,
                                 recipesOfFilter: highToLow,
@@ -165,6 +177,7 @@ const rootReducer =(state=initialState, action)=>{
                         const highToLow= state.recipes.sort((a,b)=>a.healthScore - b.healthScore)
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 recipesOfFilter:highToLow,
                                 filtered: true
@@ -179,6 +192,7 @@ const rootReducer =(state=initialState, action)=>{
                         const lowToHigh= state.recipeFilter.recipesOfFilter.sort((a,b)=>b.healthScore - a.healthScore)
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 ...state.recipeFilter,
                                 recipesOfFilter:lowToHigh,
@@ -189,6 +203,7 @@ const rootReducer =(state=initialState, action)=>{
                         const lowToHigh= state.recipes.sort((a,b)=>b.healthScore - a.healthScore)
                         return{
                             ...state,
+                            render:'recipeFilter',
                             recipeFilter:{
                                 recipesOfFilter:lowToHigh,
                                 filtered: true
@@ -200,6 +215,9 @@ const rootReducer =(state=initialState, action)=>{
         case RESET_FILTERS:
             return{
                 ...state,
+                recipesName: [],
+                recipeId:[],
+                render:'',
                 recipeFilter:{
                     recipesOfFilter:[],
                     filtered:false

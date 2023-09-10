@@ -311,11 +311,27 @@ import Pagination from '../Pagination/Pagination';
 
 const CardsContainer = () =>{
 
-    const recipes= useSelector(state=>state.recipes) //toma el array que esta en la propiedad recipes del estado global
-    const recipesFilter=useSelector(state=>state.recipesFilter)
-    const recipeName=useSelector(state=>state.recipeName)
-    
     const dispatch= useDispatch();
+
+    const recipes='';
+   
+
+    const render=useSelector(state=>state.render)
+
+    if(render === 'recipes'){ //de acuardo al valor de render, es el estado que se va a renderizar
+        recipes=useSelector(state=>state.recipes)
+    }
+    else{
+        if(render ==='recipesName'){
+            recipes=useSelector(state=>state.recipesName)
+        }
+        else{
+            if(render==='recipeFilter'){
+                recipes=useSelector(state=>state.recipesFilter)
+            }
+        }
+    }
+    
 
     //paginacion
     const [page, setPage]=useState(1); //numero de pagina
@@ -327,7 +343,6 @@ const CardsContainer = () =>{
     
     //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
     
-    //* realizar renderizado condicional en base al estado de filtrado
     
     //? terminar con la funcionalidad y el front de crear recipe
     //? agregarle la funcion de search bar para buscar por nombre (dispatch)
