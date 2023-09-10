@@ -10,6 +10,7 @@ export const SORT_BY_NAME= "SORT_BY_NAME"
 export const RESET_FILTERS= "RESET_FILTERS"
 
 
+
 export const getRecipes= ()=>{
     return async function (dispatch){
         try {
@@ -82,4 +83,13 @@ export const sortName=(order)=>{ //ascendente descendente
 
 export const resetFilters=()=>{
     dispatch({type:RESET_FILTERS})
+}
+
+export const createRecipe=async(recipe)=>{
+   try {
+        await axios.post(`http://localhost:3001/recipes`, recipe)
+        return alert('Recipe created successfully')
+   } catch (error) {
+      throw Error(error.message)
+   }
 }

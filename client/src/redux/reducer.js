@@ -1,5 +1,5 @@
 
-import {GET_RECIPES, GET_RECIPE_ID, GET_BY_NAME, FILTER_BY_DIETS, FILTER_BY_SOURCE, SORT_BY_SCORE, SORT_BY_NAME,RESET_FILTERS} from './actions'
+import {GET_RECIPES, GET_RECIPE_ID, GET_BY_NAME, FILTER_BY_DIETS, FILTER_BY_SOURCE, SORT_BY_SCORE, SORT_BY_NAME, RESET_FILTERS} from './actions'
 
 const initialState={
     recipes: [],
@@ -7,7 +7,6 @@ const initialState={
     recipeFilter:{recipes: [], filtered:false},
     recipesName:[],
     render:'',
-    
 };
 
 
@@ -223,6 +222,7 @@ const rootReducer =(state=initialState, action)=>{
                     filtered:false
                 }
             }
+        
         default: 
             return {...state};
     }
