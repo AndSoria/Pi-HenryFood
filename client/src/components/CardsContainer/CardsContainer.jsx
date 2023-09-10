@@ -342,21 +342,20 @@ const CardsContainer = () =>{
 
     
     //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
+    //! modificar el force de la base de datos
     
     
     //? terminar con la funcionalidad y el front de crear recipe
-    //? agregarle la funcion de search bar para buscar por nombre (dispatch)
     
     //* diseñar los manejos de errores
     //* en el backend limpiar funciones
-    //* agregar validaaciones tanto en el front como en el back
+    //* agregar validaciones tanto en el front como en el back
 
     //! estilos de pagination
     //! terminar con el front de detail
     //? dar estilos a la nav bar
     //! estilos de la landing page
     
-    //! modificar el force de la base de datos
     
     useEffect(()=>{
             dispatch(getRecipes())

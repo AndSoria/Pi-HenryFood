@@ -10,13 +10,14 @@ const SearchBar = ()=>{
     const dispatch= useDispatch();
 
 
-    const handleChange=()=>{
+    const handleChange=(e)=>{
         setSearchName(e.target.value) //actualiza el valor del estado global
     }
 
     const handleSearch=()=>
     {
         dispatch(recipeFilterName(searchName)) //cuando se hace click lanza la action para buscar
+        setSearchName('')
     }
     return(
         <div className={style.container}>
@@ -28,7 +29,7 @@ const SearchBar = ()=>{
                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
             </svg>
         </div>
-        <button className={style.btn} onClick={handleSearch}>Seacrh</button>
+        <button type= "button" className={style.btn} onClick={handleSearch}>Seacrh</button>
     </div>
     )
 }
