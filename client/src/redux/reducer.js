@@ -50,7 +50,7 @@ const rootReducer =(state=initialState, action)=>{
         }
         
         case FILTER_BY_SOURCE:
-            if(action.payload===false){ //for API
+            if(action.payload==='API'){ //for API
                 
                 if(state.recipeFilter.filtered===true){ //tengo un estado filtrado
                     return {
@@ -75,7 +75,7 @@ const rootReducer =(state=initialState, action)=>{
                 }
             }
             else{ //for BDD
-                if(state.recipeFilter.filtered===true){ //tengo un estado filtrado
+                if(state.recipeFilter.filtered==='DB'){ //tengo un estado filtrado
                     return {
                         ...state, 
                         recipeFilter:{

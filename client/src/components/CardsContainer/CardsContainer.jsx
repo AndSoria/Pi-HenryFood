@@ -325,20 +325,24 @@ const CardsContainer = () =>{
     const until=from + perPage; //variable para indicar hasta que elemento se va a realizar el slice del array
 
     
+    //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
     
-    //! estilos de pagination
-    //! un boton para limpiar los filtros
-    //! terminar con el front de detail
+    //* realizar renderizado condicional en base al estado de filtrado
+    
     //? terminar con la funcionalidad y el front de crear recipe
-    //? agregarle la funcion de search bar para buscar por nombre
-    //? dar estilos a la nav bar
+    //? agregarle la funcion de search bar para buscar por nombre (dispatch)
+    
+    //* diseñar los manejos de errores
     //* en el backend limpiar funciones
     //* agregar validaaciones tanto en el front como en el back
-    //* diseñar los manejos de errores
-    //! terminar con los estilos de la landing page
-    //! modificar el force de la base de datos
-    //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
 
+    //! estilos de pagination
+    //! terminar con el front de detail
+    //? dar estilos a la nav bar
+    //! estilos de la landing page
+    
+    //! modificar el force de la base de datos
+    
     useEffect(()=>{
             dispatch(getRecipes())
         

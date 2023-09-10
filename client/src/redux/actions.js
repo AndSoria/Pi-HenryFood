@@ -57,7 +57,7 @@ export const recipeFilterName=(name)=>{
     }
 }
 
-export const recipeFilterDiets=(diets)=>{
+export const filterDiets=(diets)=>{
 
     return function(dispatch){
 
