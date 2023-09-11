@@ -1,48 +1,120 @@
 .mainContainer{
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:center;
     position: fixed;
     z-index: 1;
     top: 0;
-    align-items:center;
     width: 100%;
-    height: 50px;
+    height: 80px;
     background: rgba(36, 36, 36, 0.945);
+    /* border: solid 2px red; */
     
 }
 
-.barHome{
+.navBar{
     display: flex;
-    flex-direction: row;
-    /* border: solid 2px white; */
+    width: 100%;
     align-items: center;
-    justify-content: space-around;
-    width: 600px;
-    height: 50px;
+    flex-direction: row;
+    /* border: solid 2px green; */
+    justify-content:center;
 }
 
-.barOther{
+
+.barHome {
     display: flex;
     flex-direction: row;
-    /* border: solid 2px fuchsia; */
     align-items: center;
     justify-content: space-around;
     width: 600px;
-    height: 50px;
-    margin-right: 120px;
-    left: 50%;
-    transform: translatex(-50%);
-}
+    height: 30px;
+    margin: 0 auto;
+
+  }
+  
+
+@font-face {
+    font-family: 'Burger';
+    src: url(../../../../api/src/assets/fonts/Black%20Burger%20Rough.ttf) ;
+} 
 
 .title
 {
-    /* border: solid 2px rebeccapurple; */
     flex-direction: row;
     display: flex;
-    margin-left: 20px;
-    height: 40px;
+    height: 30px;
     justify-content: center;
     align-items: center;
+    
+    && h2{
+        font-family: 'Burger';
+        color: aliceblue;
+        font-size: 30px;
+        margin: 0;
+        position: absolute;
+        left:30px; 
+    }
 }
+
+.searchBarContainer {
+    margin: 0;
+    position: absolute;
+    right: 0;
+    width: auto; 
+}
+
+.auxBar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.resetBtn{
+    display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 80px;
+  margin-left: 5px; 
+  color: aliceblue;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: rgba(3, 223, 21, 0.384);
+  cursor: pointer;
+  border-radius: 5px;
+
+}
+
+.resetBtn:disabled{
+    background-color: rgb(136, 0, 0);
+  }
+
+.btnMenu {
+    height: 30px;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: rgb(234, 234, 234);
+    box-shadow: 0px 0px 60px #000000;
+    font-size: 22px;
+    font-family: 'Helvetica';
+  }
+  
+  .btnMenu:hover {
+    background-color: black;
+  }
+  
+  
+  
+  
+  
+  

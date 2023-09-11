@@ -312,31 +312,43 @@ import Pagination from '../Pagination/Pagination';
 const CardsContainer = () =>{
 
     const dispatch= useDispatch();
-
-    const recipes='';
-   
-
+    const stateGlobal = useSelector((state) => state);
     const render=useSelector(state=>state.render)
 
-    if(render === 'recipes'){ //de acuardo al valor de render, es el estado que se va a renderizar
-        recipes=useSelector(state=>state.recipes)
-    }
-    else{
-        if(render ==='recipesName'){
-            recipes=useSelector(state=>state.recipesName)
+    let recipes=[];
+    
+    if (typeof stateGlobal[render] === 'object' && stateGlobal[render].recipesOfFilter)
+    {
+        recipes = stateGlobal[render].recipesOfFilter;
+    } 
+    else 
+    {
+        if (Array.isArray(stateGlobal[render])) 
+        {
+            recipes = stateGlobal[render];
         }
-        else{
-            if(render==='recipeFilter'){
-                recipes=useSelector(state=>state.recipesFilter)
-            }
-        }
     }
+
+
+    // switch (render) {
+    //   case 'recipes':
+    //     recipes = stateGlobal.recipes;
+    //     break;
+    //   case 'recipesName':
+    //     recipes = stateGlobal.recipesName;
+    //     break;
+    //   case 'recipeFilter':
+    //     recipes = stateGlobal.recipesFilter;
+    //     break;
+    //   default:
+    //     recipes = [];
+    // }
     
 
     //paginacion
     const [page, setPage]=useState(1); //numero de pagina
-    const [perPage, setPerPage]=useState(9) //cantidad de recetas por pagina
-    const maxPages= Math.ceil(recipes.length / perPage); //cantidad de paginas que vamos a tener
+    const perPage=9; //cantidad de recetas por pagina
+    const maxPages= Math.ceil(recipes?.length / perPage); //cantidad de paginas que vamos a tener
     const from= (page-1) * perPage; //variable para indicar desde que elemento se va a realizar el slice del array
     const until=from + perPage; //variable para indicar hasta que elemento se va a realizar el slice del array
 
@@ -356,25 +368,32 @@ const CardsContainer = () =>{
     //? dar estilos a la nav bar
     //! estilos de la landing page
     
-    
     useEffect(()=>{
+           
+        if(render==='recipes'){
+            
             dispatch(getRecipes())
+        }
+            
         
-    },[dispatch])
+    },[render])
+    
 
     
 
     return (
-        <div className={style.cardsContainer}>
+        <div className={style.container}>
             <Pagination page={page} setPage={setPage} maxPages={maxPages}/>
-            <div>
-                {recipes.slice(from, until).map((recipe)=>{
+            <div className={style.cards}>
+                {
+                recipes.slice(from, until).map((recipe)=>{
                     return <Card 
                         id={recipe.id}
                         name={recipe.name}
                         image={recipe.image}
-                        diets={recipe.diets || []} //ver si es necesario tener ese array de diets
+                        diets={recipe.diets}
                         created={recipe.created}
+                        healthScore={recipe.healthScore}
                         ></Card>
                 })}
             </div>

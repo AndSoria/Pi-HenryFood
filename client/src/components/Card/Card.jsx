@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 const Card = (props)=>{
 
-    const {id, name ,image , diets,created}=props
+    const {id, name ,image , diets,created,healthScore}=props
     
     return(
         
@@ -35,16 +35,12 @@ const Card = (props)=>{
       </div>
 
       <div className={style.reference}>
-
-        <div className={style.createdBy}>
-              { created ? <h4>Dbb</h4> : <h4>Api</h4>}
-        </div>
-
-        <div className={style.id}>
-            <h4>{id}</h4>
-        </div>
-
-
+                <div className={style.data}>
+                        { created ? <p>Db</p> : <p>Api</p>}
+                        <p>Id: {id}</p>
+                        <p>Health Score: {healthScore}</p>
+                </div>
+        
         <div className={style.info}>
 
             <Link to={`/detail/${id}`}>

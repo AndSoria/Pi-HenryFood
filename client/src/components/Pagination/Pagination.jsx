@@ -20,10 +20,10 @@ const Pagination =({page, setPage,maxPages})=>{
 
     return (
         <div className={style.barPage}>
-            <button className={style.previousBtn} onClick={previousPage} disabled={page<=1}></button>
-            <p>{page} de {maxPages}</p>
-            <button className={style.nextBtn} onClick={nextPage} disabled={page>=maxPages}></button>
-
+            
+            <button className={style.buttonPage} onClick={previousPage} disabled={page<=1}>Previous</button>
+            <p className={style.referencePages}>{page} de {maxPages}</p>
+            <button className={style.buttonPage} onClick={nextPage} disabled={page>=maxPages}>Next</button>
         </div>
     )
 }

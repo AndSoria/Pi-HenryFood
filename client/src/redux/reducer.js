@@ -4,9 +4,9 @@ import {GET_RECIPES, GET_RECIPE_ID, GET_BY_NAME, FILTER_BY_DIETS, FILTER_BY_SOUR
 const initialState={
     recipes: [],
     recipeId: [],
-    recipeFilter:{recipes: [], filtered:false},
+    recipeFilter:{recipesOfFilter:[], filtered: false},
     recipesName:[],
-    render:'',
+    render:'recipes',
 };
 
 
@@ -20,12 +20,12 @@ const rootReducer =(state=initialState, action)=>{
             return {...state, recipeId: action.payload}
 
         case GET_BY_NAME:
-            return {...state,render:'recipesName', recipeName: action.payload}
+            return {...state,render:'recipesName', recipesName: action.payload}
         
         case FILTER_BY_DIETS:
             if(state.recipeFilter.filtered===true){
 
-                const recipesFiltered= state.recipeFilter.recipes.filter(recipe=>recipe.diets.includes(action.payload))
+                const recipesFiltered= state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.diets.includes(action.payload))
                 return {
                     ...state, 
                     render:'recipeFilter',
@@ -44,12 +44,13 @@ const rootReducer =(state=initialState, action)=>{
                             ...state,
                                 render:'recipeFilter',
                                 recipeFilter:{
-                                    recipes:recipesFiltered,
+                                    recipesOfFilter:recipesFiltered,
                                     filtered:true
                             }
                 }
             }
         }
+        break;
         
         case FILTER_BY_SOURCE:
             if(action.payload==='API'){ //for API
@@ -60,7 +61,7 @@ const rootReducer =(state=initialState, action)=>{
                         render:'recipeFilter',
                         recipeFilter:{
                             ...state.recipeFilter,
-                            recipesOfFilter: state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.created===false)
+                            recipesOfFilter: [...state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.created===false)]
                         }
                      }
                  }   
@@ -71,7 +72,7 @@ const rootReducer =(state=initialState, action)=>{
                             render:'recipeFilter',
                             recipeFilter:
                             {
-                                recipesOfFilter:state.recipes.filter(recipe=>recipe.created===false),
+                                recipesOfFilter:[...state.recipes.filter(recipe=>recipe.created===false)],
                                 filtered: true
                             }
                         }
@@ -79,37 +80,41 @@ const rootReducer =(state=initialState, action)=>{
                 }
             }
             else{ //for BDD
-                if(state.recipeFilter.filtered==='DB'){ //tengo un estado filtrado
-                    return {
-                        ...state, 
-                        render:'recipeFilter',
-                        recipeFilter:{
-                            ...state.recipeFilter,
-                            recipesOfFilter: state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.created===true)
-                        }
-                     }
-                 }   
-                else{
-                    if(state.recipeFilter.filtered===false){ //no tengo un estado filtrado
-                        return{
-                            ...state,
+                if(action.payload==='DB'){
+
+                    if(state.recipeFilter.filtered===true){ //tengo un estado filtrado
+                        return {
+                            ...state, 
                             render:'recipeFilter',
-                            recipeFilter:
-                            {
-                                recipesOfFilter:state.recipes.filter(recipe=>recipe.created===false),
-                                filtered: true
+                            recipeFilter:{
+                                ...state.recipeFilter,
+                                recipesOfFilter: [...state.recipeFilter.recipesOfFilter.filter(recipe=>recipe.created===true)]
+                            }
+                         }
+                     }   
+                    else{
+                        if(state.recipeFilter.filtered===false){ //no tengo un estado filtrado
+                            return{
+                                ...state,
+                                render:'recipeFilter',
+                                recipeFilter:
+                                {
+                                    recipesOfFilter: [...state.recipes.filter(recipe=>recipe.created===true)],
+                                    filtered: true
+                                }
                             }
                         }
                     }
                 }
                 
             }
+            break;
         
             case SORT_BY_NAME:
                 if(action.payload==='A'){
                     if(state.recipeFilter.filtered===true){ //si tengo un estado filtrado
                         
-                        const ordenAscendente= state.recipeFilter.recipesOfFilter.sort((a,b)=>a.name.localCompare(b.name))
+                        const ordenAscendente= [...state.recipeFilter.recipesOfFilter.sort((a,b)=>a.name.localeCompare(b.name))]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -120,7 +125,7 @@ const rootReducer =(state=initialState, action)=>{
                         }
                     }
                     if(state.recipeFilter.filtered===false){ //si no tengo un estado filtrado
-                        const ordenAscendente= state.recipes.sort((a,b)=>a.name.localCompare(b.name))
+                        const ordenAscendente= [...state.recipes.sort((a,b)=>a.name.localeCompare(b.name))]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -135,7 +140,7 @@ const rootReducer =(state=initialState, action)=>{
                 if(action.payload==='D'){
                     if(state.recipeFilter.filtered===true){
                         
-                        const ordenDescendente= state.recipeFilter.recipesOfFilter.sort((a,b)=>b.name.localCompare(a.name))
+                        const ordenDescendente=[...state.recipeFilter.recipesOfFilter.sort((a,b)=>b.name.localeCompare(a.name))]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -146,7 +151,7 @@ const rootReducer =(state=initialState, action)=>{
                         }
                     }
                     if(state.recipeFilter.filtered===false){
-                        const ordenDescendente= state.recipes.sort((a,b)=>b.name.localCompare(a.name))
+                        const ordenDescendente= [...state.recipes.sort((a,b)=>b.name.localeCompare(a.name))]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -157,12 +162,13 @@ const rootReducer =(state=initialState, action)=>{
                         }
                     }
                 }
+                break;
 
             case SORT_BY_SCORE:
                 if(action.payload==='HIGH_TO_LOW'){
                     if(state.recipeFilter.filtered===true){ //si tengo un estado filtrado
                         
-                        const highToLow= state.recipeFilter.recipesOfFilter.sort((a,b)=>a.healthScore - b.healthScore)
+                        const highToLow= [...state.recipeFilter.recipesOfFilter.sort((a,b)=>b.healthScore - a.healthScore)]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -173,7 +179,7 @@ const rootReducer =(state=initialState, action)=>{
                         }
                     }
                     if(state.recipeFilter.filtered===false){ //si no tengo un estado filtrado
-                        const highToLow= state.recipes.sort((a,b)=>a.healthScore - b.healthScore)
+                        const highToLow= [...state.recipes.sort((a,b)=>b.healthScore - a.healthScore)]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -188,7 +194,7 @@ const rootReducer =(state=initialState, action)=>{
                 if(action.payload==='LOW_TO_HIGH'){
                     if(state.recipeFilter.filtered===true){
                         
-                        const lowToHigh= state.recipeFilter.recipesOfFilter.sort((a,b)=>b.healthScore - a.healthScore)
+                        const lowToHigh= [...state.recipeFilter.recipesOfFilter.sort((a,b)=>a.healthScore - b.healthScore)]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -199,7 +205,7 @@ const rootReducer =(state=initialState, action)=>{
                         }
                     }
                     if(state.recipeFilter.filtered===false){
-                        const lowToHigh= state.recipes.sort((a,b)=>b.healthScore - a.healthScore)
+                        const lowToHigh= [...state.recipes.sort((a,b)=>a.healthScore - b.healthScore)]
                         return{
                             ...state,
                             render:'recipeFilter',
@@ -210,13 +216,14 @@ const rootReducer =(state=initialState, action)=>{
                         }
                     }
                 }
+                break;
         
         case RESET_FILTERS:
             return{
                 ...state,
                 recipesName: [],
                 recipeId:[],
-                render:'',
+                render:'recipes',
                 recipeFilter:{
                     recipesOfFilter:[],
                     filtered:false

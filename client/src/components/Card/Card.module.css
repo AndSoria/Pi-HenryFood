@@ -5,8 +5,8 @@
   align-items: center;
   /* background-color: brown; */
   /* border: solid 3px red; */
-  height: 310px; /* Altura total de la tarjeta */
-  width: 400px; /* Ancho total de la tarjeta */
+  height: 320px; /* Altura total de la tarjeta */
+  width: 410px; /* Ancho total de la tarjeta */
   /* border-radius: 20px; */
   margin: 20px; /* Espacio alrededor de la tarjeta */
   background-image: url('../../utils/image/Dark/Products\ -\ Clay.jpg');
@@ -113,19 +113,65 @@ box-shadow: inset -10px 10px 20px #45321b,
  align-items: center;
  justify-content: space-around;
  width: 400px;
- height: 50px;
+ height: 80px;
  /* border: solid 3px yellow; */
 }
 
-.createdBy {
-  grid-area: createdBy;
+.data {
+  display: grid;
+  grid-template-rows: repeat(3, 20px);
+  grid-template-columns: 300px; /* Una sola columna para alinear a la izquierda */
+  justify-content: center; /* Alinea los elementos en la parte izquierda */
+  align-items: center; /* Alinea los elementos en la parte superior */
+  /* border: solid 3px red; */
+  height: 80px;
+  width: 300px;
+  font-size: 12px;
+  
+  margin-bottom: 10px;
+  font-weight: bold;
+ 
 }
+ .data p{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 8px;
+  }
+
+
+
 
 .info {
   grid-area: info;
+  margin-right: 10px;
+  margin-bottom: 3px;
 }
 
 .linkButton {
+  margin: 12px;
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
+  background: #333;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444, inset -5px -5px 10px #222;
+  font-family: 'Damion', cursive;
+  border: none;
+  font-size: 16px;
+  color: rgb(161, 161, 161);
+  transition: 500ms;
+}
+
+.linkButton:hover {
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222, inset -5px -5px 10px #444;
+  color: #d6d6d6;
+  transition: 500ms;
+}
+
+/* .linkButton {
   --hover-shadows: 16px 16px 33px #121212,
                     -16px -16px 33px #303030;
   --accent: white;
@@ -136,14 +182,6 @@ box-shadow: inset -10px 10px 20px #45321b,
   background-color: #212121;
   color: white;
   padding: 1em 2em;
-  /* transition: box-shadow ease-in-out 0.3s,
-              background-color ease-in-out 0.1s,
-              letter-spacing ease-in-out 0.1s,
-              transform ease-in-out 0.1s; */
-  /* box-shadow: 13px 13px 10px #1c1c1c,
-              -13px -13px 10px #262626; */
-              /* border-radius: 28px; */
-              /* background: linear-gradient(145deg, #3a3a3a, #313131); */
               box-shadow:  5px 5px 4px #222222,
                            -5px -5px 4px #4a4a4a;
 
@@ -159,4 +197,4 @@ box-shadow: inset -10px 10px 20px #45321b,
                var(--accent) 0px 0px 30px 5px;
   background-color: var(--accent);
   transform: scale(0.95);
- }
+ } */

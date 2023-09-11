@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import style from'./SearchBar.module.css'
 import { recipeFilterName } from '../../redux/actions';
 import { useState } from 'react';
@@ -14,22 +14,31 @@ const SearchBar = ()=>{
         setSearchName(e.target.value) //actualiza el valor del estado global
     }
 
-    const handleSearch=()=>
+    const handleSearch=async ()=>
     {
-        dispatch(recipeFilterName(searchName)) //cuando se hace click lanza la action para buscar
-        setSearchName('')
+        try {
+            if (searchName.trim() === '') {
+              // Mostrar un mensaje de error o proporcionar retroalimentación al usuario
+              throw alert("El campo de búsqueda no puede estar vacío.");
+            }
+      
+            // Llamar a la acción de búsqueda y esperar a que se complete
+            await dispatch(recipeFilterName(searchName));
+      
+            // Limpiar el campo de entrada después de la búsqueda exitosa
+            setSearchName('');
+
+          } catch (error) {
+
+            // Manejar errores de búsqueda, por ejemplo, mostrar un mensaje de error al usuario
+            throw alert(error.message);
+          }
+        
     }
     return(
         <div className={style.container}>
-        <input type="text" name="text" className={style.input} required="" placeholder="Type to search..." value={searchName} onChange={handleChange}/>
-        <div className={style.icon}>
-            <svg xmlns="http://www.w3.org/2000/svg" className={style.ionicon} viewBox="0 0 512 512">
-                <title>Search</title>
-                <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
-            </svg>
-        </div>
-        <button type= "button" className={style.btn} onClick={handleSearch}>Seacrh</button>
+        <input type="text" name="text" className={style.input} required="" placeholder="Type name..." value={searchName} onChange={handleChange}/>
+        <button type= "button" className={style.buttonSearch} disabled={searchName===''} onClick={handleSearch}>Search</button>
     </div>
     )
 }

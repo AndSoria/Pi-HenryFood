@@ -1,8 +1,17 @@
-.cardsContainer {
+.container {
     display: flex;
-    flex-direction: row;
-    margin-top: 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    width: 100%;
     flex-wrap: wrap;
-    /* border: solid 3px black; */
-    
+}
+
+.cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
 }

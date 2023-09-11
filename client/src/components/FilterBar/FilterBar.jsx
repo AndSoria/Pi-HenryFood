@@ -1,35 +1,36 @@
 import { useDispatch } from 'react-redux'
-import style from './OrderBar.module.css'
+import style from './FilterBar.module.css'
 import { filterDiets, filterSource} from '../../redux/actions'
 
 
 
-const FilterBar=({options, setOptions})=>{
+const FilterBar=()=>{
     // const arrayFilter=["dairy free", "fodmap friendly", "gluten free", "ketogenic", "lacto ovo vegetarian","paleolithic", "pescatarian", "primal", "vegan", "vegetarian", "whole 30"]
 
     const dispatch=useDispatch()
     
 
     const handleSource= (e)=>{
+        const {value}= e.target
 
-            dispatch(filterSource(e.target.value))
+            dispatch(filterSource(value))
+
     }
 
-    const handleDiets = async (e)=>{
-
-        await setOptions((options)=>[...options, e.target.value])
-
-        dispatch(filterDiets(options))
-
+    const handleDiets = (e)=>{
+        const {value}= e.target
+        dispatch(filterDiets(value))
     }
 
     return(
         <div className={style.filterContainer}>
             <select className={style.orders} onChange={handleSource}>
+                <option disabled selected value="">Source</option>
                 <option className={style.option} value="API">API</option>
                 <option className={style.option} value="DB">DB</option>
             </select>
             <select className={style.orders} onChange={handleDiets}>
+                <option disabled selected value="">Type of diets</option>
                 <option className={style.option} value="dairy free">Dairy free</option>
                 <option className={style.option} value="fodmap friendly">Fodmap friendly</option>
                 <option className={style.option} value="gluten free">Gluten free</option>

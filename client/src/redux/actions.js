@@ -58,31 +58,43 @@ export const recipeFilterName=(name)=>{
     }
 }
 
-export const filterDiets=(diets)=>{
+export const filterDiets=(diet)=>{
 
     return function(dispatch){
 
-        diets.map(diet=>dispatch({type:FILTER_BY_DIETS , payload: diet}))
+        dispatch({type:FILTER_BY_DIETS , payload: diet})
     }
 
 }
 
 export const filterSource =(created)=>{
 
-    dispatch({type: FILTER_BY_SOURCE, payload: created})
+    return function(dispatch){
+        dispatch({type: FILTER_BY_SOURCE, payload: created})
+    }
+
 }
 
 
 export const sortScore= (order)=>{ //mayor a menor , menor a mayor
-    dispatch({type:SORT_BY_SCORE, payload:order})
+    return function(dispatch){
+
+        dispatch({type:SORT_BY_SCORE, payload:order})
+    }
 }
 
 export const sortName=(order)=>{ //ascendente descendente
-    dispatch({type:SORT_BY_NAME, payload:order})
+    return function(dispatch){
+        
+        dispatch({type:SORT_BY_NAME, payload: order})
+    }
 }
 
 export const resetFilters=()=>{
-    dispatch({type:RESET_FILTERS})
+    return function (dispatch){
+
+        dispatch({type:RESET_FILTERS})
+    }
 }
 
 export const createRecipe=async(recipe)=>{

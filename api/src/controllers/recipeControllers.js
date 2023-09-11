@@ -3900,9 +3900,9 @@ const getRecipeByName= async (name) =>{
     const apiRecipe= result.filter((recipe)=>recipe.title.toLowerCase().includes(name.toLowerCase()))
 
     const recipeFoundApi =apiRecipe.map(recipe => {
-        recipe.vegetarian===true && !recipe.diets.include('vegetarian') && recipe.diets.push ('vegetarian')
-        recipe.vegan===true && !recipe.diets.include('vegan') && recipe.diets.push ('vegan')
-        recipe.glutenFree===true && !recipe.diets.include('gluten free') && recipe.diets.push ('gluten free')
+        recipe.vegetarian===true && !recipe.diets.includes('vegetarian') && recipe.diets.push ('vegetarian')
+        recipe.vegan===true && !recipe.diets.includes('vegan') && recipe.diets.push ('vegan')
+        recipe.glutenFree===true && !recipe.diets.includes('gluten free') && recipe.diets.push ('gluten free')
         
         const steps = recipe.analyzedInstructions[0]?.steps?.map(step => {
             return { number: step.number, step: step.step };

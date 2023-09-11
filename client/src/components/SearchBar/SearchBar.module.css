@@ -1,49 +1,42 @@
 .container {
-  position: relative;
-  --size-button: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   color: white;
-  /* border: solid 3px red; */
+
+  width: 300px;
+ 
 }
 
 .input {
-  padding-left: var(--size-button);
-  height: var(--size-button);
-  font-size: 15px;
+  height: 25px;
+  font-size: 12px;
   border: none;
-  color: #fff;
+  color: aliceblue;
   outline: none;
-  width: var(--size-button);
-  transition: all ease 0.3s;
+  width: 200px; 
   background-color: #191A1E;
   box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e;
-  border-radius: 50px;
+  border-radius: 30px;
+}
+
+.buttonSearch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 60px;
+  margin-left: 5px; 
+  color: aliceblue;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: rgba(3, 223, 21, 0.384);
   cursor: pointer;
+  border-radius: 5px;
 }
 
-.input:focus,
-.input:not(:invalid) {
-  width: 200px;
-  cursor: text;
-  box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 1.5px 1.5px 3px #0e0e0e, inset -1.5px -1.5px 3px #5f5e5e;
-}
-
-.input:focus + .icon,
-.input:not(:invalid) + .icon {
-  pointer-events: all;
-  cursor: pointer;
-}
-
-.container .icon {
-  position: absolute;
-  width: var(--size-button);
-  height: var(--size-button);
-  top: 0;
-  left: 0;
-  padding: 8px;
-  pointer-events: none;
-}
-
-.container .icon svg {
-  width: 80%;
-  height: 80%;
+.buttonSearch:disabled{
+  background-color: rgb(136, 0, 0);
 }

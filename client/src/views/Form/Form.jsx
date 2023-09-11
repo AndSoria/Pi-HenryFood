@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import style from './Form.module.css';
+import { createRecipe } from '../../redux/actions';
 
 const Form = () => {
 
@@ -90,7 +91,7 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(create)
+    dispatch(createRecipe(recipeData))
     // Aquí puedes manejar la lógica para crear la receta con los datos del formulario
   };
 
@@ -99,53 +100,55 @@ const Form = () => {
       <h2>Create Recipe</h2>
       <form onSubmit={handleSubmit}>
         <div className={style.formGroup}>
-          <label htmlFor="recipeName">Recipe Name</label>
+          <label htmlFor="recipeName" className={style.labelName}>Recipe Name</label>
           <input
             type="text"
             id="recipeName"
             name='name'
             value={recipeData.name}
+            className={style.inputName}
             onChange={handleInputChange}
           />
-          <label htmlFor="healthScore">Health score</label>
+          <label htmlFor="healthScore" className={style.labelScore}>Health score</label>
           <input
             type="text"
             id="healthScore"
             name='healthScore'
+            className={style.inputScore}
             value={recipeData.healthScore}
             onChange={handleInputChange}
           />
 
         </div>
         <div className={style.imageSummaryContainer}>
-          <div className={style.formGroupImageContainer}>
-            <h4>Image</h4>
-            {recipeData.image &&(<img src={recipeData.image} alt="Image food" style={{maxWidth:"100px", maxHeight:"100px"}}/>)} {/*renderiza la imagen*/}
-            <input type='file' accept='image/*' onChange={handleImageChange}/> {/*para cargar la imagen*/}
+          <div className={style.imageContainer}>
+            <h5 className={style.imageTitle}>Image</h5>
+            {recipeData.image &&(<img src={recipeData.image} alt=" "  className={style.img}/>)} {/*renderiza la imagen*/}
+            <input type='file' accept='image/*' onChange={handleImageChange} className={style.inputImg}/> {/*para cargar la imagen*/}
           </div>
-          <div className={style.formGroupSummaryContainer}>
-            <h4>Dish summary</h4>
-            <textarea name='dishSummary' value={recipeData.dishSummary} onChange={handleInputChange} rows={3}> </textarea>
+          <div className={style.summaryContainer}>
+            <h5 className={style.summaryTitle}>Dish summary</h5>
+            <textarea name='dishSummary' value={recipeData.dishSummary} onChange={handleInputChange} rows={3} className={style.areaText}> </textarea>
           </div>
         </div>
-        <div className={style.formGroupInstructionsContainer}>
-          <h3>Instructions</h3>
-          {recipeData.instructions.map((instruction, index) => (
-            <div key={index} className={style.instructionsRow}>
-              <input
-                type="text"
-                value={instruction}
-                onChange={(e) => handleInstructionChange(index, e.target.value)}
-                required
-              />
-              <button type="button" onClick={() => handleRemoveInstruction(index)}> Remove </button>
-            </div>
-          ))}
-          <button type="button" onClick={handleAddInstruction}> Add </button>
+        <div className={style.instructionsDietsContainer}>
+            <div className={style.instructionsContainer}>
+              <h5>Instructions</h5>
+              {recipeData.instructions.map((instruction, index) => (
+                <div key={index} className={style.instructionsRow}>
+                  <input className={style.inputInstructions}
+                    type="text"
+                    value={instruction}
+                    onChange={(e) => handleInstructionChange(index, e.target.value)}
+                    required
+                  />
+                  <button type="button" onClick={() => handleRemoveInstruction(index)} className={style.btnRemove}> Remove </button>
+                </div>
+              ))}
+              <button type="button" onClick={handleAddInstruction} className={style.btnAdd}> Add </button>
         </div>
-
-        <div className={style.formGroupDietsContainer}>
-          <h3>Select Diets</h3>
+        <div className={style.dietsContainer}>
+          <h5 className={style.dietsTitle} >Select Diets</h5>
           <div className={style.listContainer} >
           <ul id='typeOfDiets' className={style.listDiets}>
             <li>
@@ -195,8 +198,16 @@ const Form = () => {
           </ul>
           </div>
         </div>
+
+
+
+
+        </div>
+        
+
+       
         <button type="submit" className={style.createButton}>
-          Create
+          Submit
         </button>
       </form>
     </div>

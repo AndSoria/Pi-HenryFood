@@ -3,19 +3,17 @@ import style from './NavBar.module.css';
 import SearchBar from "../SearchBar/SearchBar";
 import FilterBar from "../FilterBar/FilterBar";
 import OrderBar from '../OrderBar/OrderBar'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetFilters } from "../../redux/actions";
-import { useState } from "react";
+
 
 const NavBar= ()=>{
     const {pathname}=useLocation();
     const dispatch=useDispatch();
-    const [options, setOptions]=useState([]);
-    const [orders,setOrders]=useState([]);
+    const render=useSelector(state=>state.render)
 
     const handleResetFilters=()=>{
-        setOptions([])
-        setOrders([])
+        
         dispatch(resetFilters())
     }
 
@@ -25,24 +23,27 @@ const NavBar= ()=>{
                 <div className={style.title}>
                 <h2>Henry Food</h2>
                 </div>
-                <div className={pathname.includes('home') ? style.barHome: style.barOther}>
+                <div className={style.barHome}>
                 
                     <Link to='/home'>
-                        <button>Home</button>
+                        <button className={style.btnMenu}>Home</button>
                     </Link>
                     <Link to='/form'>
-                        <button>Create recipe</button>
+                        <button className={style.btnMenu}>Create recipe</button>
                     </Link>
                     
                 </div>
-                    {(!pathname.includes('detail') && !pathname.includes('form') && <SearchBar />)}
+                <div className={style.searchBarContainer}>
+                    {(!pathname.includes('detail') && !pathname.includes('form') && <SearchBar  />)}
+                </div>
 
             </div>
-            <div className={style.auxBar}>
-                    <OrderBar setOrder={setOrder} order={orders} />
-                    <FilterBar setOptions={setOptions}  options={options} />
-                    <button className={style.resetBtn} onClick={handleResetFilters}>Clean filters</button>
-            </div>
+            {(!pathname.includes('detail') && !pathname.includes('form') && <div className={style.auxBar}>
+                    <OrderBar />
+                    <FilterBar />
+                    <button className={style.resetBtn} onClick={handleResetFilters} disabled={render==='recipes'}>Clean filters</button>
+            </div>)}
+            
         </div>
     )
 }
