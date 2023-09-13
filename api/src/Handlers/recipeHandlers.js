@@ -1,4 +1,5 @@
-const {createRecipe, getRecipeByIdApi, getRecipeByIdBdd, getRecipeByName,getAllRecipes}=require('../controllers/recipeControllers')
+const { getRecipeByIdApi, getRecipeByIdBdd, getRecipeByName,getAllRecipes}=require('../controllers/recipeControllers')
+const {createRecipe}= require('../controllers/createRecipe')
 
 const allRecipes =async(req, res)=>{
     try {
