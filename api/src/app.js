@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
-const {getArrayDiets}=require('./controllers/dietControllers.js');
+const dietsHandler = require('./Handlers/dietsHandler.js');
 
 
 require('./db.js');
@@ -27,20 +27,18 @@ server.use((req, res, next) => {
 
 
 server.use('/', routes);
-// chargeDataRecipe()
 
-// const initTableDiets= async (req, res)=>{ //aca se crea una funcion para cargar la lista de las dietas en la base de datos
+// server.use(async (req, res, next) => {
 //   try {
-//     await getArrayDiets()
-//     console.log('Table of diets created');
+//         await dietsHandler(req, res);
+//         next();
 //   } catch (error) {
-//     console.log(error.message);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//         next(error);
 //   }
-// }
+// });
 
-// initTableDiets()
 
-// Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;

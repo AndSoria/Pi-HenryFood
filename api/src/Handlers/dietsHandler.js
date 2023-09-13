@@ -3,10 +3,9 @@ const {getArrayDiets}=require('../controllers/dietControllers')
 const dietsHandler= async (req, res)=>{
 
     try {
-        // res.send('estoy ejecutando el handler de las dietas')
         const arrayDiets= await getArrayDiets()
-        // return arrayDiets;
-        res.status(200).json(arrayDiets)
+  
+        return res.status(200).json({ message: 'Diet data loaded successfully', arrayDiets });
         
     } catch (error) {
         res.status(400).json({error:error.message})
