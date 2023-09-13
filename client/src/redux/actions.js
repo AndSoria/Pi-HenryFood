@@ -97,11 +97,3 @@ export const resetFilters=()=>{
     }
 }
 
-export const createRecipe=async(recipe)=>{
-   try {
-        await axios.post(`http://localhost:3001/recipes`, recipe)
-        return alert('Recipe created successfully')
-   } catch (error) {
-      throw Error(error.message)
-   }
-}

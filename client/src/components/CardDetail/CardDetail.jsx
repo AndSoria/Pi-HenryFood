@@ -10,66 +10,77 @@ const CardDetail = (props)=>{
     const index=0;
 
     const {id, name ,image , diets,created, dishSummary, healthScore,instructions}=props
+
     return(
+
+        <div className={style.container}>
+                <div className={style.dataLeft}>
+                    <div className={style.imageContainer}>
+
+                    <img  src={image}/>
+                    </div>
+
+                    <div className={style.id}>
+                        <h4>Id: {id} </h4>
+                    </div>
+
+                    <div className={style.healthScore}>
+
+                        <h4>Health score: {healthScore}</h4>
+
+                    </div>
+                <div className={style.source}>
+
+                    { created ? <h4>Api</h4> : <h4>Database</h4>}
+
+                </div>
+                <div className={style.typeOfDiets}>
+                    {/* <div >
+                    </div> */}
+                    <h4 className={style.titleDiets}>Diets</h4>
+                    <div className={style.diets}>
+                        { 
+                            diets.map(element => {
+                            if(typeof element=== 'object' ){ 
+                            return (<h5>{element.name}</h5>)
+                        }else{
+                            return (<h5>{element}</h5>)
+                            }
+                        })}
+                    </div>
+                    
+                </div>
+
+                </div>
+                <div className={style.dataRight}>
+
+                    <div className={style.titleName}>
+                        <h2>{name}</h2>  
+                    </div>
+
+                    <div className={style.summaryContainer}>
+                        <div className={style.titleSummary}>
+                            <h3>Summary</h3>
+                         </div>
+                        <div className={style.summary} dangerouslySetInnerHTML={{ __html: dishSummary }}></div>
+                    </div>
+
+                    <div className={style.titleInstructions}>
+                       
+                            <h3 >Step by step</h3>
+                        
+                            <ol className={style.listSteps}>
+                            {
+                                instructions.map(step=>{
+                                return (<li  key={index+1}>{step.step}</li>)
+                            })}
+                            </ol>
+                    
+                    </div>
+                </div>
+        </div>
         
-
-<div className={style.parent}>
-    <div className={style.div1}> </div>
-    <div className={style.div2}> </div>
-    <div className={style.div3}>
-      <img className={style.img} src={image}/>
-    </div>
-    <div className={style.div4}>
-
-    </div>
-    <div className={style.div5}>
-        <h2>{name}</h2>
-        
-    </div>
-    <div className={style.div6}>
-        <h3>Summary</h3>
-        <div className={style.text} dangerouslySetInnerHTML={{ __html: dishSummary }} />
-    </div>
-    <div className={style.div7}> 
-        <ol>
-            {
-                instructions.map(step=>{
-                return (<li key={index+1}>{step}</li>)
-            })}
-
-        </ol>
-    </div>
-        
-    <div className={style.div8}>
-    </div>
-    <div className={style.div9}> </div>
-    <div className={style.div10}>
-    { 
-                diets.map(element => {
-                    if(typeof element=== 'object' ){ 
-                        return (<h3>{element.name}</h3>)
-                    }else{
-                        return (<h3>{element}</h3>)
-                    }
-                })}
-    </div>
-    <div className={style.div11}> <h3>Health score: {healthScore}</h3></div>
-    <div className={style.div12}> <h3>id: {id} </h3> </div>
-    <div className={style.div13}>
-            { created===false && <h3>API</h3>}
-            { created===true && <h3>DDB</h3>}
-         </div>
-</div>
-
     )
 }
-
 export default CardDetail
 
-
-// <h4>{id}</h4>
-        // <h4>{name}</h4>
-        // <div className={style.createdBy}>
-        //       { created ? <h4>Dbb</h4> : <h4>Api</h4>}
-        // </div>
-        // <img src={image}/>

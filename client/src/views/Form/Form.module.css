@@ -8,13 +8,18 @@
     transform: translatex(-50%);
     background-image: url('../../utils/image/Dark/Products\ -\ Clay.jpg');
     border-radius: 40px;
-    margin-top: 70px;
-    box-shadow: 0 7px 50px 10px #000000aa;
+    margin-top: 130px;
+    /* box-shadow: 0 7px 50px 10px #000000aa; */
+    box-shadow: 0 8px 50px 10px #252525;
+    /* box-shadow: 0 8px 32px 0 #25272a; */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    /* border: solid 2px red; */
   }
 
 .container h2 {
   font-size: 24px;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 

@@ -329,22 +329,6 @@ const CardsContainer = () =>{
         }
     }
 
-
-    // switch (render) {
-    //   case 'recipes':
-    //     recipes = stateGlobal.recipes;
-    //     break;
-    //   case 'recipesName':
-    //     recipes = stateGlobal.recipesName;
-    //     break;
-    //   case 'recipeFilter':
-    //     recipes = stateGlobal.recipesFilter;
-    //     break;
-    //   default:
-    //     recipes = [];
-    // }
-    
-
     //paginacion
     const [page, setPage]=useState(1); //numero de pagina
     const perPage=9; //cantidad de recetas por pagina
@@ -355,19 +339,11 @@ const CardsContainer = () =>{
     
     //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
     //! modificar el force de la base de datos
-    
-    
-    //? terminar con la funcionalidad y el front de crear recipe
-    
+
     //* diseñar los manejos de errores
     //* en el backend limpiar funciones
     //* agregar validaciones tanto en el front como en el back
 
-    //! estilos de pagination
-    //! terminar con el front de detail
-    //? dar estilos a la nav bar
-    //! estilos de la landing page
-    
     useEffect(()=>{
            
         if(render==='recipes'){
@@ -378,9 +354,6 @@ const CardsContainer = () =>{
         
     },[render])
     
-
-    
-
     return (
         <div className={style.container}>
             <Pagination page={page} setPage={setPage} maxPages={maxPages}/>

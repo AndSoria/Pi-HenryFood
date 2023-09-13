@@ -5,11 +5,8 @@ import { filterDiets, filterSource} from '../../redux/actions'
 
 
 const FilterBar=()=>{
-    // const arrayFilter=["dairy free", "fodmap friendly", "gluten free", "ketogenic", "lacto ovo vegetarian","paleolithic", "pescatarian", "primal", "vegan", "vegetarian", "whole 30"]
-
     const dispatch=useDispatch()
     
-
     const handleSource= (e)=>{
         const {value}= e.target
 
