@@ -28,15 +28,15 @@ server.use((req, res, next) => {
 
 server.use('/', routes);
 
-// server.use(async (req, res, next) => {
-//   try {
-//         await dietsHandler(req, res);
-//         next();
-//   } catch (error) {
-//         res.status(500).json({ error: 'Internal Server Error' });
-//         next(error);
-//   }
-// });
+server.use(async (req, res, next) => {
+  try {
+        await dietsHandler(req, res);
+        next();
+  } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+        next(error);
+  }
+});
 
 
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

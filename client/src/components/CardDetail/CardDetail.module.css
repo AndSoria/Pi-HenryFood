@@ -1,7 +1,7 @@
 .container {
     display: flex;
     justify-content: center;
-    align-items: stretch; /* Ajustar la altura según el contenido */
+    align-items: stretch; 
     flex-direction: row;
     width: 1000px;
     margin-top: 80px;
@@ -23,10 +23,10 @@
     background-image: url(../../utils/image/Dark/Products\ -\ Clay.jpg);
     border-radius: 20px 0 0 20px;
     margin-bottom: 20px;
-    background-color: #D1D7E0; /* Cambia el color de fondo a blanco */
+    background-color: #D1D7E0; 
     box-shadow:
-        -4px -4px 8px rgba(0, 0, 0, 0.1), /* Cambia las sombras a tonos más claros */
-        4px 4px 8px rgba(255, 255, 255, 0.3); /* Cambia las sombras a tonos más claros */
+        -4px -4px 8px rgba(0, 0, 0, 0.1), 
+        4px 4px 8px rgba(255, 255, 255, 0.3); 
 }
 
 .dataRight {
@@ -42,9 +42,9 @@
     filter: drop-shadow(5px 5px 10px #252525);
 }
 
-/* Establece la altura mínima de dataRight en función de dataLeft */
+
 .dataRight {
-    min-height: 100%; /* Altura mínima es 100% - 10px de margen superior */
+    min-height: 100%; 
 }
 
 .healthScore, .source {
@@ -146,10 +146,6 @@ h5 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: #D1D7E0;
-    box-shadow:
-        -4px -4px 8px rgba(0, 0, 0, 0.1),
-        4px 4px 8px rgba(255, 255, 255, 0.3); */
     border-radius: 10px;
     margin-top: 20px;
     color: #252a30;

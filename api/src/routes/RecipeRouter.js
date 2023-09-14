@@ -1,4 +1,5 @@
 const {Router}= require('express');
+const {validate}=require('../middleware/validate')
 
 const {recipeIdHandler, recipeNameHandler, recipePostHandler,allRecipes}= require('../Handlers/recipeHandlers')
 
@@ -11,6 +12,6 @@ recipeRouter.get('/allRecipes', allRecipes)
 
 recipeRouter.get('/:id',recipeIdHandler)
 
-recipeRouter.post('/', recipePostHandler)
+recipeRouter.post('/',validate, recipePostHandler)
 
 module.exports=recipeRouter;

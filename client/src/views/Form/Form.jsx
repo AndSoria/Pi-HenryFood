@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import style from './Form.module.css';
+import axios from 'axios';
 
 const Form = () => {
   const [recipeData, setRecipeData] = useState({
@@ -33,7 +34,7 @@ const Form = () => {
             setErrors({...errors, name:'',enable:true})
         }
 
-        if(recipeData.healthScore<1 && recipeData.healthScore>100)
+        if(recipeData.healthScore<1 || recipeData.healthScore>100)
         {
           setErrors({...errors, healthScore:'Valor incorrecto, debe ser entre 1 y 100',enable:false})
         }else{
@@ -131,7 +132,6 @@ const Form = () => {
         instructions: arrayInstructions
     })
   };
-
 
   const handleDiets =(e)=>{
     const {value, checked}=e.target

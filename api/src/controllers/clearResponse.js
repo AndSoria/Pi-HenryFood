@@ -1,6 +1,6 @@
 const clearResponse = (response)=>{
 
-    if(response.length>1){
+    if(response.length>=1){
         const allRecipes=response.map(recipe => {
             // Actualiza las dietas según las condiciones
             if (recipe.vegetarian === true && !recipe.diets.includes('vegetarian')) {
@@ -31,8 +31,6 @@ const clearResponse = (response)=>{
         });
     
         return allRecipes
-    }else{
-        
     }
     
 }

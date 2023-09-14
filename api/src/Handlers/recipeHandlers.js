@@ -73,7 +73,7 @@ const recipePostHandler= async (req,res)=>{
                 const newRecipe= await createRecipe(name,image, dishSummary, healthScore, instructions, diets)
             })
             
-            res.status(201).json('Recipes successfully created')
+            res.status(201).json('Recipes successfully created',newRecipe)
         }
         else{
 
