@@ -7,7 +7,7 @@ const Form = () => {
     name: '',
     image:'',
     dishSummary:'',
-    healthScore: 0,
+    healthScore: '',
     instructions: [],
     diets:[],
 
@@ -23,66 +23,105 @@ const Form = () => {
     enable:true,
   });
 
-  const validate=(recipeData)=>{
+  const validate= async (state, property)=>{
        
-        const nameRegex = /^[A-Za-z\s]+$/; //validate for name
-        const validImage = /^(image\/(png|jpg|jpeg|gif|bmp))$/; // Validación para tipos de imagen válidos
+        const numberRegex = /^[0-9]+$/;
+        const nameRegex = /^[A-Za-z\s]+$/ //validate for name
+       const validImage= /^(data:image\/(png|jpeg|jpg|gif|bmp);base64,)/; //validate por image
 
-        if (nameRegex.test(recipeData.name)) {
-                setErrors({...errors, name: "No puede contener números ni símbolos", enable:false});
-        }else{
-            setErrors({...errors, name:'',enable:true})
+        switch (property) {
+          case 'name':
+            if(state.name.trim()===''){
+              await setErrors({...errors, name: 'Requerido',enable:false});
+            }
+            else{
+              if (!nameRegex.test(state.name)) {
+              
+                await setErrors({...errors, name: 'Solo letras',enable:false});
+              }else{
+                await  setErrors({...errors, name:'',enable:true})
+                
+              }
+            }
+            break;
+          case 'healthScore':
+            if (state.healthScore.trim()==='') {
+              await setErrors({...errors, healthScore:'Ingrese puntaje', enable:false})
+            } else {
+              
+              if (!numberRegex.test(state.healthScore)) {
+                await setErrors({...errors, healthScore:'Solo numeros',enable:false})
+                } else {
+                      if(state.healthScore<1 || state.healthScore>100)
+                      {
+                        await setErrors({...errors, healthScore:'Debe ser entre 1 y 100', enable:false})
+                      }
+                      else
+                      {
+                            await setErrors({...errors, healthScore:'',enable:true})
+                      }
+                }
+              }
+              break
+
+          case 'dishSummary':
+
+              if(state.dishSummary.trim()===''){
+                await setErrors({...errors, dishSummary: 'Agregue una descripción',enable:false})
+              }
+              else{
+                await setErrors({...errors, dishSummary: '',enable:true})
+              }
+              break
+          case 'instructions':
+
+              if(state.instructions.includes('') || recipeData.instructions.includes('')|| recipeData.instructions.length===0)
+              {
+                await setErrors({...errors, instructions:'Complete las instrucciones', enable:false})
+              }
+              else{
+                await setErrors({...errors, instructions: '',enable:true})
+              }
+              break
+          
+          case 'diets':
+            if(state.diets.length===0)
+            {
+              await setErrors({...errors, diets:'Seleccione una o mas', enable:false})
+            }
+            else{
+              await setErrors({...errors, diets: '',enable:true})
+            }
+            break
+          case 'image':
+            if(!validImage.test(state.image)){
+              
+              await setErrors({...errors, image:'Seleccione una imagen valida', enable:false}) // La extensión no es válida
+          }
+          else{
+            await setErrors({...errors, image: '',enable:true})
+
+          }
+        
+            break
+
+          default:
+            break;
         }
 
-        if(recipeData.healthScore<1 || recipeData.healthScore>100)
-        {
-          setErrors({...errors, healthScore:'Valor incorrecto, debe ser entre 1 y 100',enable:false})
-        }else{
-          setErrors({...errors, healthScore:'',enable:true})
-        }
-
-        if(recipeData.dishSummary===''){
-          setErrors({...errors, dishSummary: 'Agregue una descripcion',enable:false})
-        }
-        else{
-          setErrors({...errors, dishSummary: '',enable:true})
-        }
-
-        if(recipeData.instructions.length===0){
-          setErrors({...errors, instructions:'Agregar una o mas instrucciones', enable:false})
-        }
-        else{
-          setErrors({...errors, instructions: '',enable:true})
-        }
-
-        if(recipeData.diets.length===0){
-          setErrors({...errors, diets:'Agregar por lo menos una dieta', enable:false})
-        } 
-        else{
-          setErrors({...errors, diets: '',enable:true})
-        }
-
-        if(validImage.test(recipeData.image)){
-          setErrors({...errors, image: 'Selecciona un archivo de imagen válido (png, jpg, jpeg, gif, bmp)',enable: false})
-        }
-        else
-        {
-          setErrors({...errors, image: '', enable:true})
-        }
-
-
-  }
+    
+      }
+      
+      console.log(recipeData)
+      console.log(errors)
 
   const handleInputChange=(e)=>
   { 
-    const property= e.target.value.name
+    const property= e.target.name
     const value= e.target.value
 
-    validate({...recipeData,[property]:value})
-    setRecipeData({
-      ...recipeData,
-      [property]:value
-    })
+    validate({...recipeData,[property]:value},property)
+    setRecipeData({...recipeData,[property]:value})
   }
 
   const handleImageChange=(e)=>{
@@ -91,10 +130,10 @@ const Form = () => {
       const reader= new FileReader();
       
       reader.onload=(e)=>{
-        const imageUrl=e.target.result;
+        const imageUrl= e.target.result;
 
-        validate({...recipeData, image:imageUrl})
-
+        validate({...recipeData, image:imageUrl},'image')
+    
         setRecipeData({ //carga en el estado
           ...recipeData,
           image:imageUrl
@@ -105,11 +144,13 @@ const Form = () => {
   }
   
   const handleInstructionChange = (index, value) => {
+
+    
     const updatedInstructions = [...recipeData.instructions]; //tomo una copia de las instrucciones
     
     updatedInstructions[index] = value; //cargo la modificacion en base al input que se modifico
     
-    validate({...recipeData, instructions: updatedInstructions})
+    validate({...recipeData, instructions: updatedInstructions},'instructions')
     setRecipeData({...recipeData,
       instructions: updatedInstructions}); //actualizo el estado
   };
@@ -138,7 +179,7 @@ const Form = () => {
     
     if(!checked){
       const arrayDiets=[...recipeData.diets.filter((diet=>diet !==value))]
-      validate({...recipeData, diets:arrayDiets})
+      validate({...recipeData, diets:arrayDiets},'diets')
       setRecipeData({
         ...recipeData,
         diets:arrayDiets
@@ -148,7 +189,7 @@ const Form = () => {
     else{
       const arrayDiets= [...recipeData.diets, value]
 
-      validate({...recipeData, diets: arrayDiets})
+      validate({...recipeData, diets: arrayDiets},'diets')
        setRecipeData({
         ...recipeData,
         diets: arrayDiets,
@@ -169,12 +210,12 @@ const Form = () => {
     <div className={style.container}>
       <h2>Create Recipe</h2>
       <form onSubmit={handleSubmit}>
-        <div className={style.formGroup}>
+        <div className={style.nameScoreContainer}>
           <label htmlFor="recipeName" className={style.labelName}>Recipe Name</label>
           <input
             type="text"
             id="recipeName"
-            name='name'
+            name="name"
             value={recipeData.name}
             className={style.inputName}
             onChange={handleInputChange}
@@ -200,6 +241,7 @@ const Form = () => {
             {recipeData.image &&(<img src={recipeData.image} alt=" "  className={style.img}  required/>)} {/*renderiza la imagen*/}
             <input type='file' accept='image/*' onChange={handleImageChange} className={style.inputImg}/> {/*para cargar la imagen*/}
             {errors.image && <span>{errors.image}</span>}
+
           </div>
           <div className={style.summaryContainer}>
             <h5 className={style.summaryTitle}>Dish summary</h5>
@@ -212,7 +254,7 @@ const Form = () => {
             <div className={style.instructionsContainer}>
               <h5>Instructions</h5>
               {recipeData.instructions.map((instruction, index) => (
-                <div key={index} className={style.instructionsRow}>
+                <div key={index} id={index} className={style.instructionsRow}>
                   <input className={style.inputInstructions}
                     type="text"
                     value={instruction}
@@ -222,13 +264,14 @@ const Form = () => {
                   <button type="button" onClick={() => handleRemoveInstruction(index)} className={style.btnRemove}> Remove </button>
                 </div>
               ))}
-              <button type="button" onClick={handleAddInstruction} className={style.btnAdd}> Add </button>
               {errors.instructions && <span>{errors.instructions}</span>}
+              <button type="button" onClick={handleAddInstruction} className={style.btnAdd}> Add </button>
         </div>
         <div className={style.dietsContainer}>
           <h5 className={style.dietsTitle} >Select Diets</h5>
+          {/* {errors.diets && <span>{errors.diets}</span>} */}
+          <span>{errors.diets}</span>
           <div className={style.listContainer} >
-          {errors.diets && <span>{errors.diets}</span>}
           <ul id='typeOfDiets' className={style.listDiets}   >
             <li >
                <input type='checkbox' name='dairyFree' value='dairy free' checked={recipeData.diets.includes('dairy free')} onChange={handleDiets} />

@@ -30,7 +30,8 @@ server.use('/', routes);
 
 server.use(async (req, res, next) => {
   try {
-        await dietsHandler(req, res);
+        await axios('https://localhost:3001/diets')
+  
         next();
   } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
