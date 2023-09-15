@@ -1,7 +1,4 @@
-//* Recibir por body : listo
-//* Crear la receta en la base de datos y 
-//! relacionarla con los tipos de dietas
-
+const {Diets, Recipe, recipe_diets}= require ('../db')
 
     
 const createRecipe= async (name,image, dishSummary, healthScore, instructions, diets)=>{

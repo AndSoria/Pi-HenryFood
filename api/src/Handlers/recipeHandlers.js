@@ -25,7 +25,7 @@ const recipeIdHandler=async(req, res)=>{
         try {
             const recipeByIdBdd= await getRecipeByIdBdd(id);
 
-            res.status(200).json(recipeByIdBdd)//verificar el estatus
+            res.status(200).json(recipeByIdBdd)
         } catch (error) {
             console.log(error);
             res.status(400).json({error:error.message})
@@ -39,7 +39,7 @@ const recipeIdHandler=async(req, res)=>{
         try {
             const recipeByIdApi= await getRecipeByIdApi(id);
 
-            res.status(200).json(recipeByIdApi)//verificar el estatus
+            res.status(200).json(recipeByIdApi)
         } catch (error) {
             res.status(400).json({error:error.message})
         }
@@ -70,10 +70,10 @@ const recipePostHandler= async (req,res)=>{
         if(Array.isArray(arrayRecipe)){
             arrayRecipe.forEach(async recipe=>{
                 const {name,image, dishSummary, healthScore,instructions,diets}= recipe;
-                const newRecipe= await createRecipe(name,image, dishSummary, healthScore, instructions, diets)
+                await createRecipe(name,image, dishSummary, healthScore, instructions, diets)
             })
             
-            res.status(201).json('Recipes successfully created',newRecipe)
+            res.status(201).json('Recipes successfully created')
         }
         else{
 

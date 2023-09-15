@@ -36,12 +36,6 @@ const CardsContainer = () =>{
     const until=from + perPage; //variable para indicar hasta que elemento se va a realizar el slice del array
 
     
-    //! agregar la funcionalidad para que se carguen las dietas cuando se levanta el servidor
-    //! modificar el force de la base de datos
-
-    //* diseñar los manejos de errores
-    //* en el backend limpiar funciones
-    //* agregar validaciones tanto en el front como en el back
 
     useEffect(()=>{
            

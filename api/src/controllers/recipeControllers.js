@@ -8,58 +8,58 @@ const { APY_KEY} = process.env;
 
 
 
- //* aca vampos a buscar una receta por Id en la Api
-    //* endpoint a utilizar: https://api.spoonacular.com/recipes/{id}/information , debemos agregarle la auntentificacion
-    
-    const getAllRecipes = async () => {
+ 
+ 
+ const getAllRecipes = async () => {
         try {
           const recipesApi = await searchApi() ;
           const recipesDb = await searchDb();
-
+          
 		  const allRecipesApi= await clearResponse(recipesApi);
-      
-        //   const allRecipesApi = recipesApi.map(recipe => {
-        //     // Actualiza las dietas según las condiciones
-        //     if (recipe.vegetarian === true && !recipe.diets.includes('vegetarian')) {
-        //       recipe.diets.push('vegetarian');
-        //     }
-        //     if (recipe.vegan === true && !recipe.diets.includes('vegan')) {
+          
+          //   const allRecipesApi = recipesApi.map(recipe => {
+              //     // Actualiza las dietas según las condiciones
+              //     if (recipe.vegetarian === true && !recipe.diets.includes('vegetarian')) {
+                  //       recipe.diets.push('vegetarian');
+                  //     }
+                  //     if (recipe.vegan === true && !recipe.diets.includes('vegan')) {
         //       recipe.diets.push('vegan');
         //     }
         //     if (recipe.glutenFree === true && !recipe.diets.includes('gluten free')) {
-        //       recipe.diets.push('gluten free');
+            //       recipe.diets.push('gluten free');
         //     }
       
         //     const steps = recipe.analyzedInstructions[0]?.steps?.map(step => {
         //       return { number: step.number, step: step.step };
         //     });
-      
+        
         //     return {
-        //       id: recipe.id,
-        //       name: recipe.title,
-        //       image: recipe.image,
-        //       dishSummary: recipe.summary,
-        //       healthScore: recipe.healthScore,
-        //       instructions: steps,
-        //       diets: recipe.diets,
-        //       created: false,
-        //     };
-
-        // });
-        
-        const allRecipes = [...allRecipesApi, ...recipesDb];
-        
-        return allRecipes;
-        // return arrayPruebaApi //retorno de prueba
+            //       id: recipe.id,
+            //       name: recipe.title,
+            //       image: recipe.image,
+            //       dishSummary: recipe.summary,
+            //       healthScore: recipe.healthScore,
+            //       instructions: steps,
+            //       diets: recipe.diets,
+            //       created: false,
+            //     };
+            
+            // });
+            
+            const allRecipes = [...allRecipesApi, ...recipesDb];
+            
+            return allRecipes;
+            // return arrayPruebaApi //retorno de prueba
         } catch (error) {
-          console.error(`Error: ${error.message}`);
-          throw new Error(`The recipes were not found`);
+            console.error(`Error: ${error.message}`);
+            throw new Error(`The recipes were not found`);
         }
-      };
+    };
     
-
+    //* endpoint a utilizar: https://api.spoonacular.com/recipes/{id}/information , debemos agregarle la auntentificacion
+    
     const getRecipeByIdApi= async(id)=>{
-
+        
     try {
         
         const recipe= await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${APY_KEY}`).then(({data})=>data)
@@ -136,12 +136,9 @@ const getRecipeByIdBdd=async (id)=>{
 }
 
 const getRecipeByName= async (name) =>{
-    //! buscar el nombre tanto en la APi como en la BDD
-    //! Discriminar mayusculas o minusculas y no tiene que ser una coincidencia exacta
-    //! Si no existe la receta debe mostrar un mensaje adecuado
-    //*Debemos modularizar el pedido a la api, y la limpieza del array para estandarizar el formato de los objetos
+    
     const databaseRecipe= await Recipe.findAll({
-        where: { //* Aca deberiamos agregar la relacion con las dietas
+        where: { 
             name:{
                 [Op.iLike]: `%${name}%`}
            

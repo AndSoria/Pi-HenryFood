@@ -269,8 +269,8 @@ const Form = () => {
         </div>
         <div className={style.dietsContainer}>
           <h5 className={style.dietsTitle} >Select Diets</h5>
-          {/* {errors.diets && <span>{errors.diets}</span>} */}
-          <span>{errors.diets}</span>
+          {errors.diets && <span>{errors.diets}</span>}
+         
           <div className={style.listContainer} >
           <ul id='typeOfDiets' className={style.listDiets}   >
             <li >
